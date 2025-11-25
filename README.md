@@ -26,9 +26,9 @@ The steps may differ depending on what materials you have and how complicated yo
 4. Test the visualizer   
 
 
-## Full Set up   
+## Full Set up (Computer + Arduino + Sensors)
 
-#### Needs
+#### Materials needed
 **Software** 
 - Processing
 - Arduino ide   
@@ -40,15 +40,18 @@ The steps may differ depending on what materials you have and how complicated yo
 - Dht11 Temperature sensor
 - Big Sound Arduino mic sensor
 - Arduino Speaker
-- Arduino Button   
+- Arduino Button
 
+
+/n
+ 
 **Steps**
 1. Download processing
 2. Download Arduino ide
 3. Download the "Arduino_Mic" file - https://github.com/weltonaddra/MoodBeats/blob/main/Arduino_Mic.java
 4. Download the "SoundToLed" file - https://github.com/weltonaddra/MoodBeats/blob/main/SoundToLed.ino
-5. Set up you breadboard depending on what sensors you're using. Our set up will be linked here --> 
-4.( **Important** ) Run the SoundToLed file in the Arduino ide before running the Arduino mic file in processing.
+5. Set up you breadboard depending on what sensors you're using. Our set up will be linked here -->
+6.( **Important** ) Run the SoundToLed file in the Arduino ide before running the Arduino mic file in processing.
   Make sure to close the serial monitor window in Arduino ide or it will cause an error in the next step.
 
 
