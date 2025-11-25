@@ -5,9 +5,11 @@ AudioInput mic;
 
 int angle = -15;
 
+//Gets the center of the canvas 
 float centerX =  height / 2;
 float centerY = width / 2;
 
+//These are use as a reference point for all the visuals
 float mainX =  centerX + 350;
 float mainY = centerY + 100;
 
@@ -21,11 +23,18 @@ float thirdY = mainY + 200;
 
 float shapeSize = 20;
 float volume = 0;
+float lastVolume = 0; //Used to check if the volume jumps
     
+Boolean volumeLoud = false;
+
 String xcord;
 String ycord;
 String cord;
 String empty;
+
+float randNoise1 = int(random(0, 200));
+float randNoise2 = int(random(0, 200));
+
 
 // This variable holds whichever palette is chosen on startup
 color[] chosenPalette;
@@ -34,7 +43,10 @@ void setup() {
   size(800,800);
   //fullScreen();
   
+
   chosenPalette = pickColorPallete();  //Randomly selects a color pallete 
+
+  
   minim = new Minim(this);
   mic = minim.getLineIn(Minim.MONO, 512);
   
@@ -70,9 +82,8 @@ void draw() {
     empty = " , ";
     cord = xcord.concat(empty).concat(ycord);
     text(cord, mouseX - 15, mouseY - 10);
-    
-
-}
+        
+  }
 
 
 void flowerEffect(color[] colors, float posX, float posY){
@@ -91,22 +102,30 @@ void flowerEffect(color[] colors, float posX, float posY){
     ellipse(posX, posY, 10, 10);  
 }
 
-void soundBars(color[] colors, int numOfBars, float xcord){
-  int margin = 120;
+void soundBars(color[] colors, int numOfBars, float xAxis){
+  int margin = 95;
   float barH = shapeSize * 11 - 15 * numOfBars;   // height scales with volume
-  float barY = height - barH;          // moves upward as it grows
+  float barY = height - barH;          // moves rectangle upward as it grows
 
   fill(colors[1]);
   
+  float xcord = xAxis;
+  
   if(numOfBars == 1){
-    rect(mainX - 60, barY, 90, barH);    
+     xcord = xAxis - 60;      
+    rect(xcord, barY + 10, 90, barH + 100);    
 
   }
-  if(numOfBars < 10){
-    rect(mainX - 180, barY, 90, barH);    // grows upward from bottom
-    rect(mainX - 60 + margin, barY, 90, barH);    // grows upward from bottom
-    soundBars(colors, numOfBars + 1, xcord + 300);
-  }
+   //fill(colors[int(random(colors.length))]);
+
+   
+   fill(colors[2]);
+  if(numOfBars < 20){
+    rect(xcord + margin * numOfBars, barY, 90, barH + 500);    // grows upward from bottom
+    
+    rect(xcord - margin * numOfBars, barY , 90, barH + 500);    // grows upward from bottom
+    soundBars(colors, numOfBars + 1, xcord);
+  } 
 }
 
 
@@ -118,20 +137,24 @@ void particles(color[] colors, float posX, float posY){
 color[] pickColorPallete(){
   // Hot Temperature Colors - set 1
   color[] hotColors1 = {
+    #811331,  // Claret
+    #702963,  //Byzantium (Dark purple)
     #880808,  // Blood Red
+    #C04000,  //Mahogany
     #A52A2A,  // Brown
     #C41E3A,  // Cardinal Red
-    #811331,  // Claret
     #F88379   // Coral Pink
   };
   
   // Hot Temperature Colors - set 2
   color[] hotColors2 = {
-    #F88379,   // Coral Pink
+    #F88379,  // Coral Pink
     #C41E3A,  // Cardinal Red
     #880808,  // Blood Red
+    #FAA0A0,  //Pastel Red  
+    #A95C68,  //Puce (light purple)
     #A52A2A,  // Brown
-    #811331  // Claret
+    #811331   // Claret
   };
   
   // Cool Temperature Colors - Set 1
@@ -140,6 +163,8 @@ color[] pickColorPallete(){
     #7393B3,  // Blue Gray
     #088F8F,  // Blue Green
     #CCCCFF,  // Periwinkle
+    #00A36C,  // Jade
+    #4682B4,  //Steel Blue 
     #6082B6   // Glaucous
   };
   
@@ -148,6 +173,7 @@ color[] pickColorPallete(){
     #6082B6,  // Glaucous
     #CCCCFF,  // Periwinkle
     #088F8F,  // Blue Green
+    #5F9EA0,  //Cadet Blue 
     #7393B3,  // Blue Gray
     #89CFF0   // Baby Blue
   };
@@ -155,7 +181,7 @@ color[] pickColorPallete(){
   //Pick a random set of color
   color[][] allPalettes = { hotColors1, hotColors2, coolColors1, coolColors2 };
   //color[] pallete = allPalettes[int(random(allPalettes.length))];
-  color[] pallete = coolColors1;
+  color[] pallete = hotColors2;
   return pallete;
   
 
