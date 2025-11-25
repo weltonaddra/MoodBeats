@@ -37,24 +37,26 @@ float randNoise2 = int(random(0, 200));
 
 
 // This variable holds whichever palette is chosen on startup
-color[] chosenPalette;
+color[] chosenPalette = pickColorPallete();  //Randomly selects a color pallete 
+
+color backgroundCol = chosenPalette[0];
+color flowerCol1 = chosenPalette[int(random(1,chosenPalette.length))];
+color flowerCol2 = chosenPalette[int(random(1,chosenPalette.length))];
+color barMiddle = chosenPalette[int(random(1,chosenPalette.length))];
+
 
 void setup() {
   size(800,800);
   //fullScreen();
   
 
-  chosenPalette = pickColorPallete();  //Randomly selects a color pallete 
-
-  
   minim = new Minim(this);
   mic = minim.getLineIn(Minim.MONO, 512);
   
-  //fill(0,102);  
 }
 
 void draw() {
-  background(chosenPalette[0]); // background color 
+  background(backgroundCol); // background color 
   
   //Getting the volume level 
   float micLevel = mic.mix.level() * 1000;
@@ -69,9 +71,9 @@ void draw() {
   noStroke();
 
 //Create the flower shape
-    flowerEffect(chosenPalette, mainX, mainY);
-    flowerEffect(chosenPalette, secondX, secondY);
-    flowerEffect(chosenPalette, thirdX, thirdY);
+    flowerEffect(flowerCol1, mainX, mainY);
+    flowerEffect(flowerCol2, secondX, secondY);
+    flowerEffect(flowerCol2, thirdX, thirdY);
     
 //Rectangles 
     soundBars(chosenPalette, 1, mainX);
@@ -86,7 +88,7 @@ void draw() {
   }
 
 
-void flowerEffect(color[] colors, float posX, float posY){
+void flowerEffect(color petalColor,float posX, float posY){
    angle += 0;
 
     float val = cos(radians(angle)) * shapeSize * 5;
@@ -94,11 +96,11 @@ void flowerEffect(color[] colors, float posX, float posY){
       float xoff = cos(radians(a)) * val;
       float yoff = sin(radians(a)) * val;
       
-      fill(colors[3]);
+      fill(petalColor);
       ellipse(posX + xoff, posY + yoff, val, val);
     }
     
-    fill(colors[1]);
+    fill(chosenPalette[5]);
     ellipse(posX, posY, 10, 10);  
 }
 
@@ -107,7 +109,7 @@ void soundBars(color[] colors, int numOfBars, float xAxis){
   float barH = shapeSize * 11 - 15 * numOfBars;   // height scales with volume
   float barY = height - barH;          // moves rectangle upward as it grows
 
-  fill(colors[1]);
+  fill(flowerCol1);
   
   float xcord = xAxis;
   
@@ -119,7 +121,7 @@ void soundBars(color[] colors, int numOfBars, float xAxis){
    //fill(colors[int(random(colors.length))]);
 
    
-   fill(colors[2]);
+   fill(flowerCol2);
   if(numOfBars < 20){
     rect(xcord + margin * numOfBars, barY, 90, barH + 500);    // grows upward from bottom
     
