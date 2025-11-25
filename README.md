@@ -15,21 +15,23 @@ Our goal was to fit as many options into this project to fit different needs, wh
 
 --- 
 
-# Running the program 
-The steps may differ depending on what materials you have and how complicated you want the setup to be. 
+# Running the program 🎶
+The steps may differ depending on what materials you have and how complicated you want the setup to be.    
+
 
 ## Simple Set up (Computer + Processing)
 1. Download processing - https://processing.org/download
 2. Download "Computer_mic" file from this github - https://github.com/weltonaddra/MoodBeats/blob/main/Computer_Mic.java#L58
 3. Run the file in processing.
-4. Test the visualizer
+4. Test the visualizer   
 
-## Full Set up 
+
+## Full Set up   
 
 #### Needs
 **Software** 
 - Processing
-- Arduino ide
+- Arduino ide   
 
 **Hardware**
 - Arduino Uno or similar
@@ -38,7 +40,7 @@ The steps may differ depending on what materials you have and how complicated yo
 - Dht11 Temperature sensor
 - Big Sound Arduino mic sensor
 - Arduino Speaker
-- Arduino Button 
+- Arduino Button   
 
 **Steps**
 1. Download processing
