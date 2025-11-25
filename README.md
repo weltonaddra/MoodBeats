@@ -15,18 +15,18 @@ Our goal was to fit as many options into this project to fit different needs, wh
 
 --- 
 
-# Running the program 🎶
+# Running the program 🎶🔊
 The steps may differ depending on what materials you have and how complicated you want the setup to be.    
 
 
-## Simple Set up (Computer + Processing)
+## Simple Set up (Computer + Processing) 🎤💻
 1. Download processing - https://processing.org/download
 2. Download "Computer_mic" file from this github - https://github.com/weltonaddra/MoodBeats/blob/main/Computer_Mic.java#L58
 3. Run the file in processing.
 4. Test the visualizer   
 
 
-## Full Set up (Computer + Arduino + Sensors)
+## Full Set up (Computer + Arduino + Sensors) 🎵🎼
 
 #### Materials needed
 **Software** 
@@ -42,8 +42,6 @@ The steps may differ depending on what materials you have and how complicated yo
 - Arduino Speaker
 - Arduino Button
 
-
-/n
  
 **Steps**
 1. Download processing
@@ -51,7 +49,9 @@ The steps may differ depending on what materials you have and how complicated yo
 3. Download the "Arduino_Mic" file - https://github.com/weltonaddra/MoodBeats/blob/main/Arduino_Mic.java
 4. Download the "SoundToLed" file - https://github.com/weltonaddra/MoodBeats/blob/main/SoundToLed.ino
 5. Set up you breadboard depending on what sensors you're using. Our set up will be linked here -->
-6.( **Important** ) Run the SoundToLed file in the Arduino ide before running the Arduino mic file in processing.
+6. ( **Important** ) Run the SoundToLed file in the Arduino ide before running the Arduino mic file in processing.
   Make sure to close the serial monitor window in Arduino ide or it will cause an error in the next step.
+
+
 
 
