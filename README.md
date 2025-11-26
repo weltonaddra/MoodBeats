@@ -1,5 +1,5 @@
 # MoodBeats 🎶🎵🎼🔊
-Mood beats is an audio/music visionlizer that contains multiple different music related options (detailed bellow) that can be enabled based on what the user wants to do. 
+Mood beats is an audio/music visualizer that contains multiple different music related options (detailed below) that can be enabled based on what the user wants to do. 
 We combine software with hardware, using an Arduino uno along with many sensors, and the applications "Processing" and "Arduino Ide". 
 
 Our goal was to fit as many options into this project to fit different needs, while keeping it fun and interactive. 
