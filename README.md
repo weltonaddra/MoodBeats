@@ -1,5 +1,5 @@
 # MoodBeats 🎶🎵🎼🔊
-Mood beats is an audio/music visualizer that contains multiple different music related options (detailed below) that can be enabled based on what the user wants to do. 
+MoodBeats is an audio/music visualizer that contains multiple different music related options (detailed below) that can be enabled based on what the user wants to do. 
 We combine software with hardware, using an Arduino uno along with many sensors, and the applications "Processing" and "Arduino Ide". 
 
 Our goal was to fit as many options into this project to fit different needs, while keeping it fun and interactive. 
@@ -8,7 +8,7 @@ Our goal was to fit as many options into this project to fit different needs, wh
 1. Computer Mic Mode: Uses the Minim library to read live audio from the laptop microphone.
 2. Arduino Mic Mode: The Arduino sends live sound level numbers through USB port, and processing reads those in real time to animate the visuals.
 3. Randomized colors with themes for hot and cool temperatures (Ready)
-4. Connecting temperature sensor to change the visualizer color pallete (almost ready)
+4. Connecting temperature sensor to change the visualizer color palette (almost ready)
 5. Outputing audio from an Arduino speaker sensor (In progress)
 6. Changing songs based on temperature or user interaction (In progress)
 
@@ -48,10 +48,8 @@ The steps may differ depending on what materials you have and how complicated yo
 2. Download Arduino ide
 3. Download the "Arduino_Mic" file - https://github.com/weltonaddra/MoodBeats/blob/main/Arduino_Mic.java
 4. Download the "SoundToLed" file - https://github.com/weltonaddra/MoodBeats/blob/main/SoundToLed.ino
-5. Set up you breadboard depending on what sensors you're using. Our set up will be linked here -->
+5. Set up your breadboard depending on what sensors you're using. Our set up will be linked here -->
 6. ( **Important** ) Run the SoundToLed file in the Arduino ide before running the Arduino mic file in processing.
-  Make sure to close the serial monitor window in Arduino ide or it will cause an error in the next step.
-
-
+7. Close the Arduino Serial Monitor — otherwise Processing will throw an error
 
 
