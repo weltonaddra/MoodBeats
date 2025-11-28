@@ -1,31 +1,22 @@
-// #include "DHT.h"
-
-// // --- Change this to your pin ---
-// #define DHTPIN   7 // DHT11 signal pin
-// #define DHTTYPE DHT11
-
-// DHT dht(DHTPIN, DHTTYPE);
-
-// void setup(){
-//     Serial.begin(9600);
-//     delay(500); //delay to let system boot
-//     Serial.println("DHT11 Humidity & temperature sensor\n\n");
-//     delay(1000); // wait before accessing sensor
-// }
-// void loop(){
-//     int temp = dht.readTemperature();
-//     Serial.println(temp);
-
-//     delay(5000); // wait 5 seconds before accessing sensor again
-// }
-
+#include "DHT.h"
 #include "pitches.h"
+
+//Temperature sensor
+#define DHTPIN   7 // DHT11 signal pin
+#define DHTTYPE DHT11
+DHT dht(DHTPIN, DHTTYPE);
 
 const int ledPin = 11;
 const int micPin = A0;
 const int speakerPin = 9;
 const int buttonPin = 2;
-const int threshold = 515;
+const int threshold = 515;  //How loud the mic needs to be to turn on the LED
+
+int buttonStates[] = {1,1,1}; //Holds the most recent 3 button states to check if it's being held 
+int stateIndex = 0;
+String buttonState = "NOT SET";
+
+
 
 int notes[] = { 
     NOTE_C4, NOTE_G2, NOTE_G3, NOTE_A3, NOTE_G3, 0, NOTE_B3, NOTE_C4  //These are just numbers in the pitches.h file that are used for the different frequencies 
@@ -40,33 +31,72 @@ int noteDurations[] = {
 
 void setup() {
   Serial.begin(9600);
+  delay(500); //delay to let system boot
+
   pinMode(ledPin, OUTPUT);
   pinMode(micPin, INPUT);
   pinMode(speakerPin, OUTPUT);
   pinMode(buttonPin, INPUT_PULLUP);
+  dht.begin(); // Start the DHT sensor
 
 }
 
 void loop() {
-  int buttonState = digitalRead(buttonPin);
+  delay(1000);
+  int buttonNum = digitalRead(buttonPin);
+  setButtonState(buttonNum);
 
-  if(buttonState == LOW){
-    startMelody(notes, noteDurations);
-    delay(2000);
-  } else {
-    Serial.println("Not pressed.");
-  }
+  float temp = dht.readTemperature();
+  temp = (is_numeric(temp)) ? (temp * 1.8) + 32 : 000;  //If temp is a number it converts it to fahrenheit 
 
-  int soundsens = analogRead(micPin);
+  int micVolume = analogRead(micPin);
+  String allValues = "Temperature: "  +  String(temp) + "   --- Button: " +  String(buttonState) + "   --- Mic: " + String(micVolume);
+  Serial.println(allValues);
 
-  if (soundsens >= threshold) {
-    // digitalWrite(ledPin, HIGH);
-    Serial.println(soundsens);
-    delay(500);
+  // if(buttonState == LOW){
+  //   startMelody(notes, noteDurations);
+  //   // delay(100);
+  // } else {
+  //   // Serial.println("Not pressed.");
+  // }
+
+
+  if (micVolume >= threshold) {
+    digitalWrite(ledPin, HIGH);
+    // Serial.println(micVolume);
+    delay(100);
   } else {
     digitalWrite(ledPin, LOW);
   }
 }
+
+void setButtonState(int inputState){
+    if(inputState == 1){ //Button not pressed
+      buttonState = "UP";
+      if(stateIndex > 0){
+        int buttonStates[] = {1,1,1}; //Reset the holding streak 
+        stateIndex = 0;
+      }
+    } 
+    
+    else if(inputState == 0){ //Button pressed 
+      buttonState = "DOWN";
+      if(stateIndex < 3){
+        buttonStates[stateIndex] = 0;
+        stateIndex += 1;
+      } else if (inputState == 0 && stateIndex == 3){
+          buttonState = "HOLD";
+          startMelody(notes, noteDurations);
+      }
+    } else{
+        buttonState = "BUTTON ERROR";
+
+    } 
+}
+
+
+
+
 
 void startMelody(int inputNotes[], int inputDurations[]){
     // iterate over the notes of the melody:
@@ -94,3 +124,9 @@ void startMelody(int inputNotes[], int inputDurations[]){
       noTone(8);
   }
 }
+
+bool is_numeric(float x) {
+  return !isnan(x);
+}
+
+
