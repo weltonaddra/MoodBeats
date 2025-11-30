@@ -1,0 +1,43 @@
+import processing.serial.*; 
+
+class Sensor{
+  Serial myPort; // Ports for reading the volume level 
+  int micLevel = 0; //Stores big sound mic level 
+  int temperature = 0;
+  Boolean buttonPressed = false;
+  String[] serialValues;
+  
+  
+  Sensor(Audio_Sense parent){
+    myPort = new Serial(parent, Serial.list()[0], 9600); //Computer port used to read volume values sent from arduinoIde
+    myPort.write("Test");
+    
+  }
+  
+  void ReadSerial(){
+    if (sensor.myPort.available() > 0) {
+      String inData = sensor.myPort.readStringUntil('\n');
+  
+      if (inData != null) {
+        println(inData.trim());
+        string dataTrim = inData.trim();
+        serialValues = split(inData, " ,");
+      }
+    }  
+  }
+  
+  float GetMicLevel(){    
+    // Read serial safely
+    while (sensor.myPort.available() > 0) {
+      String inData = sensor.myPort.readStringUntil('\n');
+  
+      if (inData != null) {
+        println(inData.trim());
+        micLevel = inData.trim();
+      }
+    
+    return micLevel;
+  }
+
+
+}

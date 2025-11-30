@@ -1,0 +1,40 @@
+// Global objects for sensor and visuals
+Comp_Visuals visuals;
+Sensor sensor;
+
+// Variable to control the audio source
+AudioSource currentAudioSource = AudioSource.COMPUTER_MIC;
+
+void setup() {
+  size(1250, 800);
+  
+  // Initialize the sensor reader and the visuals
+  sensor = new Sensor(this);
+  visuals = new Comp_Visuals(this, height, width);
+  
+  println("Setup complete.");
+  println("Press 'm' to toggle between COMPUTER MIC and ARDUINO MIC.");
+  println("Current audio source: " + currentAudioSource);
+}
+
+void draw() {
+  sensor.update();
+  visuals.update(currentAudioSource, sensor.getTemperature());
+  
+  // 3. Draw the visuals, passing in the mic level from the Arduino
+  //    (This value is only used if the audio source is ARDUINO_MIC)
+  visuals.startVisuals(sensor.getMicLevel());
+}
+
+// Function to handle keyboard input
+void keyReleased() {
+  if (key == 'm' || key == 'M') {
+    // Toggle the audio source
+    if (currentAudioSource == AudioSource.COMPUTER_MIC) {
+      currentAudioSource = AudioSource.ARDUINO_MIC;
+    } else {
+      currentAudioSource = AudioSource.COMPUTER_MIC;
+    }
+    println("Audio source switched to: " + currentAudioSource);
+  }
+}
