@@ -46,10 +46,11 @@ The steps may differ depending on what materials you have and how complicated yo
 **Steps**
 1. Download processing
 2. Download Arduino ide
-3. Download the "Arduino_Mic" file - https://github.com/weltonaddra/MoodBeats/blob/main/Arduino_Mic.java
-4. Download the "SoundToLed" file - https://github.com/weltonaddra/MoodBeats/blob/main/SoundToLed.ino
-5. Set up your breadboard depending on what sensors you're using. Our set up will be linked here -->
-6. ( **Important** ) Run the SoundToLed file in the Arduino ide before running the Arduino mic file in processing.
-7. Close the Arduino Serial Monitor — otherwise Processing will throw an error
+3. Download the MoodBeats Arduino file
+4. Download the MoodBeats Processing file
+5. Set up your breadboard depending on what sensors you're using. Our set up is in this document on page "images" --> https://docs.google.com/document/d/1Up0sF4Uc4GQD4-OSgvs-OctP33G2jJDWwtfR-9qe6C8/edit?usp=sharing
+6. Make sure you have the right libraries for DHT11 in Arduino, and run the MoodBeats file in Arduino IDE.
+7. ( **Important** ) Make sure the serial port is closed on your Arduino ide, then run the main file in processing. 
+
 
 
